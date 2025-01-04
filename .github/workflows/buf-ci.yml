@@ -56,7 +56,7 @@ jobs:
             --proto_path=proto \
             --doc_out=docs \
             --doc_opt=markdown,docs.md \
-            $(find proto/postgres-proto-schema/v1 -name "*.proto")
+            $(find proto/postgres_proto_schema -name "*.proto")
 
       - name: Generate Validation Code
         run: |
