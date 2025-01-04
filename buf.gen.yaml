@@ -1,15 +1,16 @@
 version: v2
+clean: true
 managed:
   enabled: true
+
 plugins:
-  # Go plugin for generating Go code
-  - remote: buf.build/protocolbuffers/go:v1.36.1
+
+  - remote: buf.build/protocolbuffers/go
     out: gen/go
     opt:
       - paths=source_relative
 
-  # TypeScript plugin for generating TypeScript code
-  - remote: buf.build/bufbuild/es:v2.2.3
+  - remote: buf.build/bufbuild/es
     out: gen/ts
     opt:
       - target=ts
