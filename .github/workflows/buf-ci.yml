@@ -18,7 +18,7 @@ permissions:
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   BUF_TOKEN: ${{ secrets.BUF_TOKEN }}
-  IS_TAGGED_PUSH: false # will be overwritten later if this isn't the case
+  #IS_TAGGED_PUSH: false # will be overwritten later if this isn't the case
 
 jobs:
   buf:
@@ -35,10 +35,15 @@ jobs:
 
       - name: Checking for Tagged Release
         run: |
-          if [[ "${{ github.ref }}" == refs/tags/* ]] && git branch --contains $(git rev-parse HEAD) | grep -q 'main'; then
-            echo "IS_TAGGED_PUSH=true" >> $GITHUB_ENV
+          echo "Current ref: ${{ github.ref }}"
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+              if git branch --contains $(git rev-parse HEAD) | grep -q 'main'; then
+                  echo "IS_TAGGED_PUSH=true" >> $GITHUB_ENV
+              else
+                  echo "IS_TAGGED_PUSH=false" >> $GITHUB_ENV
+              fi
           else
-            echo "IS_TAGGED_PUSH=false" >> $GITHUB_ENV
+              echo "IS_TAGGED_PUSH=false" >> $GITHUB_ENV
           fi
 
       - name: Debug
