@@ -37,11 +37,7 @@ jobs:
         run: |
           echo "Current ref: ${{ github.ref }}"
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-              if git branch --contains $(git rev-parse HEAD) | grep -q 'main'; then
-                  echo "IS_TAGGED_PUSH=true" >> $GITHUB_ENV
-              else
-                  echo "IS_TAGGED_PUSH=false" >> $GITHUB_ENV
-              fi
+              echo "IS_TAGGED_PUSH=true" >> $GITHUB_ENV
           else
               echo "IS_TAGGED_PUSH=false" >> $GITHUB_ENV
           fi
