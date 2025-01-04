@@ -1,19 +1,17 @@
 version: v2
-clean: true
+#clean: true
 managed:
   enabled: true
-  disable:
-  - file_option: go_package_prefix
-    module: buf.build/bufbuild/protovalidate
 
 plugins:
 
   - remote: buf.build/protocolbuffers/go
     out: gen/go
     opt:
-      - paths=source_relative
+      - module=github.com/zackiles/postgres-proto-schema/gen/go
 
   - remote: buf.build/bufbuild/es
     out: gen/ts
     opt:
       - target=ts
+    include_imports: true
