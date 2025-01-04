@@ -1,0 +1,149 @@
+syntax = "proto3";
+
+package postgres_proto_schema.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/zackiles/postgres-proto-schema/gen/go/postgres-proto-schema/v1";
+
+// Register validate extension
+extend google.protobuf.FieldOptions {
+  buf.validate.FieldConstraints rules = 1042; // This is the standard field number for validate rules
+}
+
+extend google.protobuf.OneofOptions {
+  buf.validate.OneofConstraints oneof = 1042;
+}
+
+extend google.protobuf.MessageOptions {
+  buf.validate.MessageConstraints message = 1042;
+}
+
+// Platform options for PostgreSQL deployments
+enum Platform {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  PLATFORM_LATEST = 0; // Default option, latest PostgreSQL version
+  PLATFORM_RDS = 1;
+  PLATFORM_AURORA = 2;
+  PLATFORM_CLOUD_SQL = 3;
+  PLATFORM_AZURE = 4;
+  PLATFORM_APSARADB = 5;
+  PLATFORM_HEROKU = 6;
+  PLATFORM_DIGITALOCEAN = 7;
+  PLATFORM_IBMCLOUD = 8;
+  PLATFORM_ALIBABACLOUD = 9;
+  PLATFORM_ELEPHANTSQL = 10;
+  PLATFORM_SUPABASE = 11;
+  PLATFORM_CITUSCLOUD = 12;
+  PLATFORM_SCALEGRID = 13;
+  PLATFORM_AIVEN = 14;
+  PLATFORM_ENTERPRISEDB = 15;
+  PLATFORM_GREENPLUM = 16;
+  PLATFORM_TIMESCALEDB = 17;
+  PLATFORM_YUGABYTE = 18;
+  PLATFORM_CRATEDB = 19;
+  PLATFORM_HYPERSCALE = 20;
+  PLATFORM_EDB = 21;
+  PLATFORM_XL = 22;
+  PLATFORM_STOLON = 23;
+  PLATFORM_PATRONI = 24;
+  PLATFORM_CLUSTERDB = 25;
+  PLATFORM_POSTGRESPRO = 26;
+  PLATFORM_PERCONA = 27;
+  PLATFORM_BIGANIMAL = 28;
+  PLATFORM_NEON = 29;
+  PLATFORM_CRUNCHY = 30;
+  PLATFORM_15 = 31;
+  PLATFORM_16 = 32;
+  PLATFORM_17 = 33;
+}
+
+// PostgreSQL column types
+enum Type {
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  TYPE_TEXT = 0; // Default type string
+  TYPE_INTEGER = 1; // Standard integer
+  TYPE_BIGINT = 2; // Large integers, often for IDs
+  TYPE_BOOLEAN = 3; // True/false flags
+  TYPE_TIMESTAMP = 4; // Date and time
+  TYPE_TIMESTAMPTZ = 5; // Timezone-aware timestamp
+  TYPE_UUID = 6; // Unique identifiers
+  TYPE_JSONB = 7; // JSON data (binary, indexed)
+  TYPE_VARCHAR = 8; // Variable-length strings
+  TYPE_NUMERIC = 9; // Precise decimals
+
+  // Moderately used types
+  TYPE_DATE = 10;
+  TYPE_SERIAL = 11;
+  TYPE_BIGSERIAL = 12;
+  TYPE_JSON = 13;
+  TYPE_DOUBLE = 14;
+  TYPE_REAL = 15;
+  TYPE_TIME = 16;
+  TYPE_INTERVAL = 17;
+  TYPE_BYTEA = 18; // Binary data
+  TYPE_INET = 19; // IP addresses
+
+  // Less common types
+  TYPE_DECIMAL = 20;
+  TYPE_SMALLINT = 21;
+  TYPE_SMALLSERIAL = 22;
+  TYPE_CHAR = 23;
+  TYPE_MONEY = 24;
+  TYPE_ENUM = 25;
+  TYPE_BIT = 26;
+  TYPE_BIT_VARYING = 27;
+  TYPE_CIDR = 28;
+  TYPE_MACADDR = 29;
+
+  // Specialized types
+  TYPE_TSVECTOR = 30; // Full text search
+  TYPE_TSQUERY = 31;
+  TYPE_INT4RANGE = 32;
+  TYPE_INT8RANGE = 33;
+  TYPE_NUMRANGE = 34;
+  TYPE_TSRANGE = 35;
+  TYPE_TSTZRANGE = 36;
+  TYPE_DATERANGE = 37;
+
+  // Geometric types
+  TYPE_POINT = 38;
+  TYPE_LINE = 39;
+  TYPE_LSEG = 40;
+  TYPE_BOX = 41;
+  TYPE_PATH = 42;
+  TYPE_POLYGON = 43;
+  TYPE_CIRCLE = 44;
+}
+
+enum ConstraintType {
+  CONSTRAINT_TYPE_UNSPECIFIED = 0;
+  CONSTRAINT_TYPE_PRIMARY_KEY = 1;
+  CONSTRAINT_TYPE_NOT_NULL = 2;
+  CONSTRAINT_TYPE_UNIQUE = 3;
+  CONSTRAINT_TYPE_CHECK = 4;
+  CONSTRAINT_TYPE_FOREIGN_KEY = 5;
+  CONSTRAINT_TYPE_EXCLUSION = 6;
+}
+
+enum ReferentialAction {
+  REFERENTIAL_ACTION_UNSPECIFIED = 0;
+  REFERENTIAL_ACTION_RESTRICT = 1;
+  REFERENTIAL_ACTION_CASCADE = 2;
+  REFERENTIAL_ACTION_SET_NULL = 3;
+  REFERENTIAL_ACTION_SET_DEFAULT = 4;
+  REFERENTIAL_ACTION_NO_ACTION = 5;
+}
+
+// Shared constraint messages
+message ForeignKeyReference {
+  string foreign_table = 1 [(buf.validate.field).string.min_len = 1];
+  string foreign_column = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message Constraint {
+  ConstraintType type = 1 [(buf.validate.field).enum.defined_only = true];
+  string check_expression = 2;
+  ForeignKeyReference foreign_key = 3;
+}

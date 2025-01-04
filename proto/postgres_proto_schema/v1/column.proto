@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package postgres_proto_schema.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+import "postgres_proto_schema/v1/common.proto";
+
+option go_package = "github.com/zackiles/postgres-proto-schema/gen/go/postgres-proto-schema/v1";
+
+message VarcharOptions {
+  int32 length = 1 [(buf.validate.field).int32.gt = 0];
+  string collation = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message CharOptions {
+  int32 length = 1 [(buf.validate.field).int32.gt = 0];
+  string collation = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message NumericOptions {
+  int32 precision = 1 [(buf.validate.field).int32.gt = 0];
+  int32 scale = 2 [(buf.validate.field).int32.gte = 0];
+}
+
+message BitOptions {
+  bool varying = 1;
+  int32 length = 2 [(buf.validate.field).int32.gt = 0];
+}
+
+message TimeOptions {
+  int32 precision = 1 [(buf.validate.field).int32 = {
+    gte: 0
+    lte: 6
+  }];
+  bool with_time_zone = 2;
+}
+
+message EnumOptions {
+  repeated string values = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    unique: true
+    items: {
+      string: {min_len: 1}
+    }
+  }];
+}
+
+message IntervalOptions {
+  string fields = 1 [(buf.validate.field).string.min_len = 1];
+  int32 precision = 2 [(buf.validate.field).int32 = {
+    gte: 0
+    lte: 6
+  }];
+}
+
+message JSONOptions {
+  bool binary = 1;
+  string validation = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message GeometricOptions {
+  string srid = 1 [(buf.validate.field).string.min_len = 1];
+  bool with_z = 2;
+  bool with_m = 3;
+}
+
+message NetworkOptions {
+  bool family = 1;
+  bool with_prefix = 2;
+  bool macaddr8 = 3;
+}
+
+message UUIDOptions {
+  bool is_random = 1;
+}
+
+message TSVECTOROptions {
+  string parser = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+// Column options
+message ColumnOptions {
+  oneof type_options {
+    VarcharOptions varchar = 2;
+    CharOptions char = 3;
+    NumericOptions numeric = 4;
+    BitOptions bit = 5;
+    TimeOptions time = 6;
+    EnumOptions enum_options = 7;
+    IntervalOptions interval = 8;
+    JSONOptions json = 9;
+    GeometricOptions geometric = 10;
+    NetworkOptions network = 11;
+    UUIDOptions uuid = 12;
+    TSVECTOROptions tsvector = 13;
+  }
+  repeated Constraint constraints = 20;
+  string default_value = 21;
+  string collation = 22;
+  Type type = 23; // The base type
+  bool is_array = 24; // Whether this is an array of the base type
+}
+
+// Column definition
+message Column {
+  string name = 1 [(buf.validate.field).string.min_len = 1];
+  Type type = 2 [(buf.validate.field).enum.defined_only = true];
+  ColumnOptions options = 3;
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+// Package documentation
+// This package provides PostgreSQL extensions for protocol buffers,
+// allowing detailed database schema definitions through proto messages.
+
+package postgres_proto_schema.v1;
+
+import "google/protobuf/descriptor.proto";
+import "postgres_proto_schema/v1/table.proto";
+import "postgres_proto_schema/v1/column.proto";
+
+option go_package = "github.com/zackiles/postgres-proto-schema/gen/go/postgres-proto-schema/v1";
+
+// Move extensions here from table.proto
+extend google.protobuf.MessageOptions {
+  TableOptions table_options = 50000;
+  bool is_composite_type = 58000;
+  Patterns.Timestamps timestamps = 50002;
+  Patterns.Audit audit = 50003;
+}
+
+extend google.protobuf.FieldOptions {
+  ColumnOptions column_options = 51000;
+}

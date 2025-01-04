@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package postgres_proto_schema.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/descriptor.proto";
+import "postgres_proto_schema/v1/column.proto";
+import "postgres_proto_schema/v1/common.proto";
+
+option go_package = "github.com/zackiles/postgres-proto-schema/gen/go/postgres-proto-schema/v1";
+
+// Table-specific enums
+enum IndexMethod {
+  INDEX_METHOD_UNSPECIFIED = 0;
+  INDEX_METHOD_BTREE = 1;
+  INDEX_METHOD_HASH = 2;
+  INDEX_METHOD_GIST = 3;
+  INDEX_METHOD_SPGIST = 4;
+  INDEX_METHOD_GIN = 5;
+  INDEX_METHOD_BRIN = 6;
+}
+
+enum PartitionMethod {
+  PARTITION_METHOD_UNSPECIFIED = 0;
+  PARTITION_METHOD_RANGE = 1;
+  PARTITION_METHOD_HASH = 2;
+  PARTITION_METHOD_LIST = 3;
+}
+
+// Table-specific messages
+message IndexDefinition {
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 63
+    pattern: "^[a-zA-Z_][a-zA-Z0-9_]*$"
+  }];
+  repeated string columns = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      string: {min_len: 1}
+    }
+  }];
+  string expression = 3 [(buf.validate.field).string = {max_len: 255}];
+  IndexMethod index_method = 4 [(buf.validate.field).enum.defined_only = true];
+  bool unique = 5;
+  string where_clause = 6 [(buf.validate.field).string = {max_len: 255}];
+}
+
+message Partitioning {
+  PartitionMethod method = 1 [(buf.validate.field).enum.defined_only = true];
+  repeated string keys = 2 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message RowLevelSecurityPolicy {
+  string name = 1 [(buf.validate.field).string.min_len = 1];
+  string using_expression = 2 [(buf.validate.field).string.min_len = 1];
+  string with_check_expression = 3 [(buf.validate.field).string = {max_len: 255}];
+  string role = 4 [(buf.validate.field).string.min_len = 1];
+}
+
+// Patterns for table generation
+message Patterns {
+  message Timestamps {
+    bool track_created = 1;
+    bool track_updated = 2;
+    bool track_deleted = 3;
+  }
+
+  message Audit {
+    bool track_creator = 1;
+    bool track_updater = 2;
+    string audit_schema = 3;
+  }
+}
+
+// Table options
+message TableOptions {
+  reserved 100 to 199;
+
+  string table_name = 1 [(buf.validate.field).string.min_len = 1];
+  string schema = 2 [(buf.validate.field).string.min_len = 1];
+  string tablespace = 3 [(buf.validate.field).string.min_len = 1];
+  bool is_unlogged = 4;
+  bool is_temporary = 5;
+  repeated IndexDefinition indexes = 6;
+  repeated Constraint table_constraints = 7;
+  map<string, string> storage_parameters = 8;
+  Partitioning partitioning = 9;
+  repeated RowLevelSecurityPolicy rls_policies = 10;
+  string collation = 12 [(buf.validate.field).string.min_len = 1];
+  string storage = 13 [(buf.validate.field).string.min_len = 1];
+  string compression = 14 [(buf.validate.field).string.min_len = 1];
+  int32 statistics_target = 15 [(buf.validate.field).int32.gt = 0];
+  Platform deployment_option = 16 [(buf.validate.field).enum = {
+    defined_only: true
+    in: [34]
+  }];
+}
+
+// Table definition
+message Table {
+  string name = 1 [(buf.validate.field).string.min_len = 1];
+  repeated Column columns = 2 [(buf.validate.field).repeated.min_items = 1];
+}
