@@ -1,3 +1,6 @@
+// See: buf descriptors https://buf.build/docs/reference/descriptors/
+// See: buf files and packages https://buf.build/docs/reference/protobuf-files-and-packages/
+
 syntax = "proto3";
 
 // Package documentation
