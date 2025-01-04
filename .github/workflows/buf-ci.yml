@@ -46,7 +46,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           input: "proto"
           push_disable_create: true
-          breaking: true
+          breaking: false
           lint: true
           format: true
           push: ${{ env.IS_TAGGED_PUSH }}
