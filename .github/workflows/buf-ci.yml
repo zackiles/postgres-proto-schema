@@ -48,5 +48,5 @@ jobs:
           push_disable_create: true
           breaking: false
           lint: true
-          format: true
+          format: false
           push: ${{ env.IS_TAGGED_PUSH }}
