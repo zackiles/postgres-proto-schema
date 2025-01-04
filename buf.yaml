@@ -13,8 +13,8 @@ modules:
     name: buf.build/zackiles/postgres-proto-schema
 # Dependencies shared by all modules in the workspace. Must be modules hosted in the Buf Schema Registry.
 # The resolution of these dependencies is stored in the buf.lock file.
-deps:
-  - buf.build/bufbuild/protovalidate # The latest accepted commit.
+#deps:
+#  - buf.build/bufbuild/protovalidate # The latest accepted commit.
 # The default lint configuration for any modules that don't have a specific lint configuration.
 #
 # If this section isn't present, AND a module doesn't have a specific lint configuration, the default
@@ -22,6 +22,8 @@ deps:
 lint:
   use:
     - STANDARD
+  ignore:
+    - proto/buf/validate/validate.proto
 # Default breaking configuration. It behaves the same as the default lint configuration.
 breaking:
   use:

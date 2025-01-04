@@ -7,7 +7,7 @@ import "google/protobuf/descriptor.proto";
 import "postgres_proto_schema/v1/column.proto";
 import "postgres_proto_schema/v1/common.proto";
 
-option go_package = "github.com/zackiles/postgres-proto-schema/gen/go/postgres-proto-schema/v1";
+option go_package = "postgres-proto-schema/gen/go/postgres-proto-schema/v1";
 
 // Table-specific enums
 enum IndexMethod {
