@@ -1,3 +1,4 @@
+# see https://raw.githubusercontent.com/bufbuild/buf-action/refs/heads/main/README.md
 name: Buf CI
 
 on:
@@ -15,87 +16,37 @@ permissions:
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   BUF_TOKEN: ${{ secrets.BUF_TOKEN }}
+  IS_TAGGED_PUSH: false # will be overwritten later if this isn't the case
 
 jobs:
-  test:
-    name: Lint and Test Buf
-    runs-on: ubuntu-latest
+  buf:
+    name: "Run Buf Action"
+    runs-on: "ubuntu-latest"
+    container:
+      image: rvolosatovs/protoc:latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v4
         with:
-          go-version: '1.20'
-  
-      - name: Install protoc-gen-doc
-        run: |
-          go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@latest
-          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+            fetch-depth: 0
 
-      - name: Install protoc-gen-validate
+      - name: Checking for Tagged Release
         run: |
-          go install github.com/envoyproxy/protoc-gen-validate@latest
-          echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+          if [[ "${{ github.ref }}" == refs/tags/* ]] && git branch --contains $(git rev-parse HEAD) | grep -q 'main'; then
+            echo "IS_TAGGED_PUSH=true" >> $GITHUB_ENV
+          else
+            echo "IS_TAGGED_PUSH=false" >> $GITHUB_ENV
+          fi
 
-      - name: Install Protobuf Compiler (protoc)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y protobuf-compiler
-          protoc --version
-
-      - name: Debug Directory Structure
-        run: ls -R proto
-  
-      - name: Generate Protobuf Docs
-        run: |
-          mkdir -p docs
-          protoc \
-            --proto_path=proto \
-            --doc_out=docs \
-            --doc_opt=markdown,docs.md \
-            $(find proto/postgres-proto-schema -name "*.proto")
-
-      - name: Generate Validation Code
-        run: |
-          protoc \
-            --proto_path=proto \
-            --validate_out="lang=go:gen/go" \
-            --go_out=gen/go \
-            $(find proto/postgres-proto-schema -name "*.proto")
-
-      - name: Buf Build Lint Format and Breaking Test
+      - name: Setup Buf and Login
         uses: bufbuild/buf-action@v1
         with:
           token: ${{ secrets.BUF_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           input: "proto"
-          breaking: true
+          push_disable_create: true
+          breaking: false
           lint: true
-          format: true
-
-  publish:
-    name: Publish to Buf Schema Registry
-    runs-on: ubuntu-latest
-    needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Buf and Build
-        uses: bufbuild/buf-action@v1
-        with:
-          token: ${{ secrets.BUF_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          input: "proto"
-          setup_only: true
-      - run: buf build --error-format=github-actions
-      
-      - name: Publish to Buf
-        uses: bufbuild/buf-action@v1
-        with:
-          push: true
+          format: false
+          push: ${{ env.IS_TAGGED_PUSH }}

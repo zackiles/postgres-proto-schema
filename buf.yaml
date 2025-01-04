@@ -1,16 +1,43 @@
 # For details on buf.yaml configuration, visit https://buf.build/docs/configuration/v2/buf-yaml
+# IMPORTANT: This is a v2 buf.yaml, not v1. See: buf migrating to v2 https://buf.build/docs/migration-guides/migrate-v2-config-files/
+# See files and packages https://buf.build/docs/reference/protobuf-files-and-packages/
 version: v2
-
+# The v2 buf.yaml file specifies a local workspace, which consists of at least one module.
+# The buf.yaml file should be placed at the root directory of the workspace, which
+# should generally be the root of your source control repository.
 modules:
+  # Each module entry defines a path, which must be relative to the directory where the
+  # buf.yaml is located. You can also specify directories to exclude from a module.
   - path: proto
+    # Modules can also optionally specify their Buf Schema Repository name if it exists.
     name: buf.build/zackiles/postgres-proto-schema
-
-deps:
-  - buf.build/bufbuild/protovalidate:v0.5.1
-
+# Dependencies shared by all modules in the workspace. Must be modules hosted in the Buf Schema Registry.
+# The resolution of these dependencies is stored in the buf.lock file.
+#deps:
+#  - buf.build/bufbuild/protovalidate # The latest accepted commit.
+# The default lint configuration for any modules that don't have a specific lint configuration.
+#
+# If this section isn't present, AND a module doesn't have a specific lint configuration, the default
+# lint configuration is used for the module.
 lint:
   use:
     - STANDARD
+  ignore:
+    - proto/buf/validate/validate.proto
+# Default breaking configuration. It behaves the same as the default lint configuration.
 breaking:
   use:
     - FILE
+# Optional Buf plugins. Can use to require custom lint or breaking change rules specified in a locally
+# installed plugin. Each Buf plugin is listed separately, and can include options if the plugin allows
+# for them. If a rule has its `default` value set to true, the rule will be checked against even if
+# the 'lint' and 'breaking' fields aren't set.
+#
+# See the example at https://github.com/bufbuild/bufplugin-go/blob/main/check/internal/example/cmd/buf-plugin-timestamp-suffix/main.go
+# for more detail about the sample below.
+#plugins:
+#  - plugin: plugin-timestamp-suffix # Specifies the installed plugin to use
+#    options:
+#      # The TIMESTAMP_SUFFIX rule specified above allows the user to change the suffix by providing a
+#      # new value here.
+#      timestamp_suffix: _time

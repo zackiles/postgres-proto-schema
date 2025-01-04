@@ -5,7 +5,7 @@ package postgres_proto_schema.v1;
 import "buf/validate/validate.proto";
 import "google/protobuf/descriptor.proto";
 
-option go_package = "github.com/zackiles/postgres-proto-schema/gen/go/postgres-proto-schema/v1";
+option go_package = "postgres-proto-schema/gen/go/postgres-proto-schema/v1";
 
 // Register validate extension
 extend google.protobuf.FieldOptions {

@@ -1,3 +1,6 @@
+// See: buf descriptors https://buf.build/docs/reference/descriptors/
+// See: buf files and packages https://buf.build/docs/reference/protobuf-files-and-packages/
+
 syntax = "proto3";
 
 // Package documentation
@@ -10,7 +13,7 @@ import "google/protobuf/descriptor.proto";
 import "postgres_proto_schema/v1/table.proto";
 import "postgres_proto_schema/v1/column.proto";
 
-option go_package = "github.com/zackiles/postgres-proto-schema/gen/go/postgres-proto-schema/v1";
+option go_package = "postgres-proto-schema/gen/go/postgres-proto-schema/v1";
 
 // Move extensions here from table.proto
 extend google.protobuf.MessageOptions {
