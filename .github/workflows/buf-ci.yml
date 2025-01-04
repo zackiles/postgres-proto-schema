@@ -20,6 +20,8 @@ jobs:
   test:
     name: Lint and Test Buf
     runs-on: ubuntu-latest
+    container:
+      image: rvolosatovs/protoc:latest
 
     steps:
       - name: Checkout repository
@@ -64,7 +66,7 @@ jobs:
             --proto_path=proto \
             --validate_out="lang=go:gen/go" \
             --go_out=gen/go \
-            $(find proto/postgres-proto-schema -name "*.proto")
+            $(find proto/postgres_proto_schema -name "*.proto")
 
       - name: Buf Build Lint Format and Breaking Test
         uses: bufbuild/buf-action@v1
