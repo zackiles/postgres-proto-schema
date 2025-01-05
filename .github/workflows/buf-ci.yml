@@ -14,7 +14,10 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  
+
+env:
+  IS_TAGGED_PUSH: false
+
 jobs:
   buf:
     name: "Run Buf Action"
@@ -37,7 +40,7 @@ jobs:
 
       - name: Debug Information
         run: |
-          echo "IS_TAGGED_PUSH: ${{ github.env.IS_TAGGED_PUSH }}"
+          echo "IS_TAGGED_PUSH: ${{ env.IS_TAGGED_PUSH }}"
           echo "GitHub Ref: ${{ github.ref }}"
           echo "Event Name: ${{ github.event_name }}"
           echo "Workflow: ${{ github.workflow }}"
@@ -59,7 +62,7 @@ jobs:
         run: buf generate
 
       - name: Push to Buf Registry
-        if: github.env.IS_TAGGED_PUSH == 'true'
+        if: env.IS_TAGGED_PUSH == 'true'
         run: |
           echo "Pushing to Buf Registry..."
           buf push proto
