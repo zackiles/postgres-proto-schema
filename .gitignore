@@ -7,11 +7,6 @@
 *.dll
 *.so
 *.dylib
-# Ignore Buf build artifacts
-buf.lock
-*.pb.go
-*.pb.js
-*.pb.ts
 
 # Test binary, built with `go test -c`
 *.test
@@ -28,5 +23,3 @@ go.work.sum
 
 # env file
 .env
-
-# gen/
