@@ -4,23 +4,18 @@
 // @ts-nocheck
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
-import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
-import { file_google_protobuf_descriptor } from "../../google/protobuf/descriptor_pb";
-import type { Constraint, ConstraintJson, Type, TypeJson } from "./common_pb";
-import { file_postgres_proto_schema_v1_common } from "./common_pb";
 import type { Message } from "@bufbuild/protobuf";
+import type { Constraint, ConstraintJson, Type, TypeJson } from "./common_pb";
 
 /**
  * Describes the file postgres_proto_schema/v1/column.proto.
  */
-export const file_postgres_proto_schema_v1_column: GenFile = /*@__PURE__*/
-  fileDesc("CiVwb3N0Z3Jlc19wcm90b19zY2hlbWEvdjEvY29sdW1uLnByb3RvEhhwb3N0Z3Jlc19wcm90b19zY2hlbWEudjEiRQoOVmFyY2hhck9wdGlvbnMSFwoGbGVuZ3RoGAEgASgFQge6SAQaAiAAEhoKCWNvbGxhdGlvbhgCIAEoCUIHukgEcgIQASJCCgtDaGFyT3B0aW9ucxIXCgZsZW5ndGgYASABKAVCB7pIBBoCIAASGgoJY29sbGF0aW9uGAIgASgJQge6SARyAhABIkQKDk51bWVyaWNPcHRpb25zEhoKCXByZWNpc2lvbhgBIAEoBUIHukgEGgIgABIWCgVzY2FsZRgCIAEoBUIHukgEGgIoACI2CgpCaXRPcHRpb25zEg8KB3ZhcnlpbmcYASABKAgSFwoGbGVuZ3RoGAIgASgFQge6SAQaAiAAIkMKC1RpbWVPcHRpb25zEhwKCXByZWNpc2lvbhgBIAEoBUIJukgGGgQYBigAEhYKDndpdGhfdGltZV96b25lGAIgASgIIi8KC0VudW1PcHRpb25zEiAKBnZhbHVlcxgBIAMoCUIQukgNkgEKCAEYASIEcgIQASJICg9JbnRlcnZhbE9wdGlvbnMSFwoGZmllbGRzGAEgASgJQge6SARyAhABEhwKCXByZWNpc2lvbhgCIAEoBUIJukgGGgQYBigAIjoKC0pTT05PcHRpb25zEg4KBmJpbmFyeRgBIAEoCBIbCgp2YWxpZGF0aW9uGAIgASgJQge6SARyAhABIkkKEEdlb21ldHJpY09wdGlvbnMSFQoEc3JpZBgBIAEoCUIHukgEcgIQARIOCgZ3aXRoX3oYAiABKAgSDgoGd2l0aF9tGAMgASgIIkcKDk5ldHdvcmtPcHRpb25zEg4KBmZhbWlseRgBIAEoCBITCgt3aXRoX3ByZWZpeBgCIAEoCBIQCghtYWNhZGRyOBgDIAEoCCIgCgtVVUlET3B0aW9ucxIRCglpc19yYW5kb20YASABKAgiKgoPVFNWRUNUT1JPcHRpb25zEhcKBnBhcnNlchgBIAEoCUIHukgEcgIQASKKBwoNQ29sdW1uT3B0aW9ucxI7Cgd2YXJjaGFyGAIgASgLMigucG9zdGdyZXNfcHJvdG9fc2NoZW1hLnYxLlZhcmNoYXJPcHRpb25zSAASNQoEY2hhchgDIAEoCzIlLnBvc3RncmVzX3Byb3RvX3NjaGVtYS52MS5DaGFyT3B0aW9uc0gAEjsKB251bWVyaWMYBCABKAsyKC5wb3N0Z3Jlc19wcm90b19zY2hlbWEudjEuTnVtZXJpY09wdGlvbnNIABIzCgNiaXQYBSABKAsyJC5wb3N0Z3Jlc19wcm90b19zY2hlbWEudjEuQml0T3B0aW9uc0gAEjUKBHRpbWUYBiABKAsyJS5wb3N0Z3Jlc19wcm90b19zY2hlbWEudjEuVGltZU9wdGlvbnNIABI9CgxlbnVtX29wdGlvbnMYByABKAsyJS5wb3N0Z3Jlc19wcm90b19zY2hlbWEudjEuRW51bU9wdGlvbnNIABI9CghpbnRlcnZhbBgIIAEoCzIpLnBvc3RncmVzX3Byb3RvX3NjaGVtYS52MS5JbnRlcnZhbE9wdGlvbnNIABI1CgRqc29uGAkgASgLMiUucG9zdGdyZXNfcHJvdG9fc2NoZW1hLnYxLkpTT05PcHRpb25zSAASPwoJZ2VvbWV0cmljGAogASgLMioucG9zdGdyZXNfcHJvdG9fc2NoZW1hLnYxLkdlb21ldHJpY09wdGlvbnNIABI7CgduZXR3b3JrGAsgASgLMigucG9zdGdyZXNfcHJvdG9fc2NoZW1hLnYxLk5ldHdvcmtPcHRpb25zSAASNQoEdXVpZBgMIAEoCzIlLnBvc3RncmVzX3Byb3RvX3NjaGVtYS52MS5VVUlET3B0aW9uc0gAEj0KCHRzdmVjdG9yGA0gASgLMikucG9zdGdyZXNfcHJvdG9fc2NoZW1hLnYxLlRTVkVDVE9ST3B0aW9uc0gAEjkKC2NvbnN0cmFpbnRzGBQgAygLMiQucG9zdGdyZXNfcHJvdG9fc2NoZW1hLnYxLkNvbnN0cmFpbnQSFQoNZGVmYXVsdF92YWx1ZRgVIAEoCRIRCgljb2xsYXRpb24YFiABKAkSLAoEdHlwZRgXIAEoDjIeLnBvc3RncmVzX3Byb3RvX3NjaGVtYS52MS5UeXBlEhAKCGlzX2FycmF5GBggASgIQg4KDHR5cGVfb3B0aW9ucyKRAQoGQ29sdW1uEhUKBG5hbWUYASABKAlCB7pIBHICEAESNgoEdHlwZRgCIAEoDjIeLnBvc3RncmVzX3Byb3RvX3NjaGVtYS52MS5UeXBlQgi6SAWCAQIQARI4CgdvcHRpb25zGAMgASgLMicucG9zdGdyZXNfcHJvdG9fc2NoZW1hLnYxLkNvbHVtbk9wdGlvbnNCvgEKHGNvbS5wb3N0Z3Jlc19wcm90b19zY2hlbWEudjFCC0NvbHVtblByb3RvUAFaGHBvc3RncmVzX3Byb3RvX3NjaGVtYS92MaICA1BYWKoCFlBvc3RncmVzUHJvdG9TY2hlbWEuVjHKAhZQb3N0Z3Jlc1Byb3RvU2NoZW1hXFYx4gIiUG9zdGdyZXNQcm90b1NjaGVtYVxWMVxHUEJNZXRhZGF0YeoCF1Bvc3RncmVzUHJvdG9TY2hlbWE6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_google_protobuf_descriptor, file_postgres_proto_schema_v1_common]);
+export declare const file_postgres_proto_schema_v1_column: GenFile;
 
 /**
  * @generated from message postgres_proto_schema.v1.VarcharOptions
  */
-export type VarcharOptions = Message<"postgres_proto_schema.v1.VarcharOptions"> & {
+export declare type VarcharOptions = Message<"postgres_proto_schema.v1.VarcharOptions"> & {
   /**
    * @generated from field: int32 length = 1;
    */
@@ -35,7 +30,7 @@ export type VarcharOptions = Message<"postgres_proto_schema.v1.VarcharOptions"> 
 /**
  * @generated from message postgres_proto_schema.v1.VarcharOptions
  */
-export type VarcharOptionsJson = {
+export declare type VarcharOptionsJson = {
   /**
    * @generated from field: int32 length = 1;
    */
@@ -51,13 +46,12 @@ export type VarcharOptionsJson = {
  * Describes the message postgres_proto_schema.v1.VarcharOptions.
  * Use `create(VarcharOptionsSchema)` to create a new message.
  */
-export const VarcharOptionsSchema: GenMessage<VarcharOptions, VarcharOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 0);
+export declare const VarcharOptionsSchema: GenMessage<VarcharOptions, VarcharOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.CharOptions
  */
-export type CharOptions = Message<"postgres_proto_schema.v1.CharOptions"> & {
+export declare type CharOptions = Message<"postgres_proto_schema.v1.CharOptions"> & {
   /**
    * @generated from field: int32 length = 1;
    */
@@ -72,7 +66,7 @@ export type CharOptions = Message<"postgres_proto_schema.v1.CharOptions"> & {
 /**
  * @generated from message postgres_proto_schema.v1.CharOptions
  */
-export type CharOptionsJson = {
+export declare type CharOptionsJson = {
   /**
    * @generated from field: int32 length = 1;
    */
@@ -88,13 +82,12 @@ export type CharOptionsJson = {
  * Describes the message postgres_proto_schema.v1.CharOptions.
  * Use `create(CharOptionsSchema)` to create a new message.
  */
-export const CharOptionsSchema: GenMessage<CharOptions, CharOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 1);
+export declare const CharOptionsSchema: GenMessage<CharOptions, CharOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.NumericOptions
  */
-export type NumericOptions = Message<"postgres_proto_schema.v1.NumericOptions"> & {
+export declare type NumericOptions = Message<"postgres_proto_schema.v1.NumericOptions"> & {
   /**
    * @generated from field: int32 precision = 1;
    */
@@ -109,7 +102,7 @@ export type NumericOptions = Message<"postgres_proto_schema.v1.NumericOptions"> 
 /**
  * @generated from message postgres_proto_schema.v1.NumericOptions
  */
-export type NumericOptionsJson = {
+export declare type NumericOptionsJson = {
   /**
    * @generated from field: int32 precision = 1;
    */
@@ -125,13 +118,12 @@ export type NumericOptionsJson = {
  * Describes the message postgres_proto_schema.v1.NumericOptions.
  * Use `create(NumericOptionsSchema)` to create a new message.
  */
-export const NumericOptionsSchema: GenMessage<NumericOptions, NumericOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 2);
+export declare const NumericOptionsSchema: GenMessage<NumericOptions, NumericOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.BitOptions
  */
-export type BitOptions = Message<"postgres_proto_schema.v1.BitOptions"> & {
+export declare type BitOptions = Message<"postgres_proto_schema.v1.BitOptions"> & {
   /**
    * @generated from field: bool varying = 1;
    */
@@ -146,7 +138,7 @@ export type BitOptions = Message<"postgres_proto_schema.v1.BitOptions"> & {
 /**
  * @generated from message postgres_proto_schema.v1.BitOptions
  */
-export type BitOptionsJson = {
+export declare type BitOptionsJson = {
   /**
    * @generated from field: bool varying = 1;
    */
@@ -162,13 +154,12 @@ export type BitOptionsJson = {
  * Describes the message postgres_proto_schema.v1.BitOptions.
  * Use `create(BitOptionsSchema)` to create a new message.
  */
-export const BitOptionsSchema: GenMessage<BitOptions, BitOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 3);
+export declare const BitOptionsSchema: GenMessage<BitOptions, BitOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.TimeOptions
  */
-export type TimeOptions = Message<"postgres_proto_schema.v1.TimeOptions"> & {
+export declare type TimeOptions = Message<"postgres_proto_schema.v1.TimeOptions"> & {
   /**
    * @generated from field: int32 precision = 1;
    */
@@ -183,7 +174,7 @@ export type TimeOptions = Message<"postgres_proto_schema.v1.TimeOptions"> & {
 /**
  * @generated from message postgres_proto_schema.v1.TimeOptions
  */
-export type TimeOptionsJson = {
+export declare type TimeOptionsJson = {
   /**
    * @generated from field: int32 precision = 1;
    */
@@ -199,13 +190,12 @@ export type TimeOptionsJson = {
  * Describes the message postgres_proto_schema.v1.TimeOptions.
  * Use `create(TimeOptionsSchema)` to create a new message.
  */
-export const TimeOptionsSchema: GenMessage<TimeOptions, TimeOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 4);
+export declare const TimeOptionsSchema: GenMessage<TimeOptions, TimeOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.EnumOptions
  */
-export type EnumOptions = Message<"postgres_proto_schema.v1.EnumOptions"> & {
+export declare type EnumOptions = Message<"postgres_proto_schema.v1.EnumOptions"> & {
   /**
    * @generated from field: repeated string values = 1;
    */
@@ -215,7 +205,7 @@ export type EnumOptions = Message<"postgres_proto_schema.v1.EnumOptions"> & {
 /**
  * @generated from message postgres_proto_schema.v1.EnumOptions
  */
-export type EnumOptionsJson = {
+export declare type EnumOptionsJson = {
   /**
    * @generated from field: repeated string values = 1;
    */
@@ -226,13 +216,12 @@ export type EnumOptionsJson = {
  * Describes the message postgres_proto_schema.v1.EnumOptions.
  * Use `create(EnumOptionsSchema)` to create a new message.
  */
-export const EnumOptionsSchema: GenMessage<EnumOptions, EnumOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 5);
+export declare const EnumOptionsSchema: GenMessage<EnumOptions, EnumOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.IntervalOptions
  */
-export type IntervalOptions = Message<"postgres_proto_schema.v1.IntervalOptions"> & {
+export declare type IntervalOptions = Message<"postgres_proto_schema.v1.IntervalOptions"> & {
   /**
    * @generated from field: string fields = 1;
    */
@@ -247,7 +236,7 @@ export type IntervalOptions = Message<"postgres_proto_schema.v1.IntervalOptions"
 /**
  * @generated from message postgres_proto_schema.v1.IntervalOptions
  */
-export type IntervalOptionsJson = {
+export declare type IntervalOptionsJson = {
   /**
    * @generated from field: string fields = 1;
    */
@@ -263,13 +252,12 @@ export type IntervalOptionsJson = {
  * Describes the message postgres_proto_schema.v1.IntervalOptions.
  * Use `create(IntervalOptionsSchema)` to create a new message.
  */
-export const IntervalOptionsSchema: GenMessage<IntervalOptions, IntervalOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 6);
+export declare const IntervalOptionsSchema: GenMessage<IntervalOptions, IntervalOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.JSONOptions
  */
-export type JSONOptions = Message<"postgres_proto_schema.v1.JSONOptions"> & {
+export declare type JSONOptions = Message<"postgres_proto_schema.v1.JSONOptions"> & {
   /**
    * @generated from field: bool binary = 1;
    */
@@ -284,7 +272,7 @@ export type JSONOptions = Message<"postgres_proto_schema.v1.JSONOptions"> & {
 /**
  * @generated from message postgres_proto_schema.v1.JSONOptions
  */
-export type JSONOptionsJson = {
+export declare type JSONOptionsJson = {
   /**
    * @generated from field: bool binary = 1;
    */
@@ -300,13 +288,12 @@ export type JSONOptionsJson = {
  * Describes the message postgres_proto_schema.v1.JSONOptions.
  * Use `create(JSONOptionsSchema)` to create a new message.
  */
-export const JSONOptionsSchema: GenMessage<JSONOptions, JSONOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 7);
+export declare const JSONOptionsSchema: GenMessage<JSONOptions, JSONOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.GeometricOptions
  */
-export type GeometricOptions = Message<"postgres_proto_schema.v1.GeometricOptions"> & {
+export declare type GeometricOptions = Message<"postgres_proto_schema.v1.GeometricOptions"> & {
   /**
    * @generated from field: string srid = 1;
    */
@@ -326,7 +313,7 @@ export type GeometricOptions = Message<"postgres_proto_schema.v1.GeometricOption
 /**
  * @generated from message postgres_proto_schema.v1.GeometricOptions
  */
-export type GeometricOptionsJson = {
+export declare type GeometricOptionsJson = {
   /**
    * @generated from field: string srid = 1;
    */
@@ -347,13 +334,12 @@ export type GeometricOptionsJson = {
  * Describes the message postgres_proto_schema.v1.GeometricOptions.
  * Use `create(GeometricOptionsSchema)` to create a new message.
  */
-export const GeometricOptionsSchema: GenMessage<GeometricOptions, GeometricOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 8);
+export declare const GeometricOptionsSchema: GenMessage<GeometricOptions, GeometricOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.NetworkOptions
  */
-export type NetworkOptions = Message<"postgres_proto_schema.v1.NetworkOptions"> & {
+export declare type NetworkOptions = Message<"postgres_proto_schema.v1.NetworkOptions"> & {
   /**
    * @generated from field: bool family = 1;
    */
@@ -373,7 +359,7 @@ export type NetworkOptions = Message<"postgres_proto_schema.v1.NetworkOptions"> 
 /**
  * @generated from message postgres_proto_schema.v1.NetworkOptions
  */
-export type NetworkOptionsJson = {
+export declare type NetworkOptionsJson = {
   /**
    * @generated from field: bool family = 1;
    */
@@ -394,13 +380,12 @@ export type NetworkOptionsJson = {
  * Describes the message postgres_proto_schema.v1.NetworkOptions.
  * Use `create(NetworkOptionsSchema)` to create a new message.
  */
-export const NetworkOptionsSchema: GenMessage<NetworkOptions, NetworkOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 9);
+export declare const NetworkOptionsSchema: GenMessage<NetworkOptions, NetworkOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.UUIDOptions
  */
-export type UUIDOptions = Message<"postgres_proto_schema.v1.UUIDOptions"> & {
+export declare type UUIDOptions = Message<"postgres_proto_schema.v1.UUIDOptions"> & {
   /**
    * @generated from field: bool is_random = 1;
    */
@@ -410,7 +395,7 @@ export type UUIDOptions = Message<"postgres_proto_schema.v1.UUIDOptions"> & {
 /**
  * @generated from message postgres_proto_schema.v1.UUIDOptions
  */
-export type UUIDOptionsJson = {
+export declare type UUIDOptionsJson = {
   /**
    * @generated from field: bool is_random = 1;
    */
@@ -421,13 +406,12 @@ export type UUIDOptionsJson = {
  * Describes the message postgres_proto_schema.v1.UUIDOptions.
  * Use `create(UUIDOptionsSchema)` to create a new message.
  */
-export const UUIDOptionsSchema: GenMessage<UUIDOptions, UUIDOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 10);
+export declare const UUIDOptionsSchema: GenMessage<UUIDOptions, UUIDOptionsJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.TSVECTOROptions
  */
-export type TSVECTOROptions = Message<"postgres_proto_schema.v1.TSVECTOROptions"> & {
+export declare type TSVECTOROptions = Message<"postgres_proto_schema.v1.TSVECTOROptions"> & {
   /**
    * @generated from field: string parser = 1;
    */
@@ -437,7 +421,7 @@ export type TSVECTOROptions = Message<"postgres_proto_schema.v1.TSVECTOROptions"
 /**
  * @generated from message postgres_proto_schema.v1.TSVECTOROptions
  */
-export type TSVECTOROptionsJson = {
+export declare type TSVECTOROptionsJson = {
   /**
    * @generated from field: string parser = 1;
    */
@@ -448,15 +432,14 @@ export type TSVECTOROptionsJson = {
  * Describes the message postgres_proto_schema.v1.TSVECTOROptions.
  * Use `create(TSVECTOROptionsSchema)` to create a new message.
  */
-export const TSVECTOROptionsSchema: GenMessage<TSVECTOROptions, TSVECTOROptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 11);
+export declare const TSVECTOROptionsSchema: GenMessage<TSVECTOROptions, TSVECTOROptionsJson>;
 
 /**
  * Column options
  *
  * @generated from message postgres_proto_schema.v1.ColumnOptions
  */
-export type ColumnOptions = Message<"postgres_proto_schema.v1.ColumnOptions"> & {
+export declare type ColumnOptions = Message<"postgres_proto_schema.v1.ColumnOptions"> & {
   /**
    * @generated from oneof postgres_proto_schema.v1.ColumnOptions.type_options
    */
@@ -569,7 +552,7 @@ export type ColumnOptions = Message<"postgres_proto_schema.v1.ColumnOptions"> & 
  *
  * @generated from message postgres_proto_schema.v1.ColumnOptions
  */
-export type ColumnOptionsJson = {
+export declare type ColumnOptionsJson = {
   /**
    * @generated from field: postgres_proto_schema.v1.VarcharOptions varchar = 2;
    */
@@ -664,15 +647,14 @@ export type ColumnOptionsJson = {
  * Describes the message postgres_proto_schema.v1.ColumnOptions.
  * Use `create(ColumnOptionsSchema)` to create a new message.
  */
-export const ColumnOptionsSchema: GenMessage<ColumnOptions, ColumnOptionsJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 12);
+export declare const ColumnOptionsSchema: GenMessage<ColumnOptions, ColumnOptionsJson>;
 
 /**
  * Column definition
  *
  * @generated from message postgres_proto_schema.v1.Column
  */
-export type Column = Message<"postgres_proto_schema.v1.Column"> & {
+export declare type Column = Message<"postgres_proto_schema.v1.Column"> & {
   /**
    * @generated from field: string name = 1;
    */
@@ -694,7 +676,7 @@ export type Column = Message<"postgres_proto_schema.v1.Column"> & {
  *
  * @generated from message postgres_proto_schema.v1.Column
  */
-export type ColumnJson = {
+export declare type ColumnJson = {
   /**
    * @generated from field: string name = 1;
    */
@@ -715,6 +697,5 @@ export type ColumnJson = {
  * Describes the message postgres_proto_schema.v1.Column.
  * Use `create(ColumnSchema)` to create a new message.
  */
-export const ColumnSchema: GenMessage<Column, ColumnJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_column, 13);
+export declare const ColumnSchema: GenMessage<Column, ColumnJson>;
 

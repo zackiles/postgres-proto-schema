@@ -6,8 +6,6 @@ import "buf/validate/validate.proto";
 import "google/protobuf/descriptor.proto";
 import "postgres_proto_schema/v1/common.proto";
 
-option go_package = "postgres-proto-schema/gen/go/postgres-proto-schema/v1";
-
 message VarcharOptions {
   int32 length = 1 [(buf.validate.field).int32.gt = 0];
   string collation = 2 [(buf.validate.field).string.min_len = 1];
