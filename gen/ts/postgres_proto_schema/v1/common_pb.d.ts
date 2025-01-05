@@ -4,25 +4,21 @@
 // @ts-nocheck
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
-import { enumDesc, extDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
-import type { FieldConstraints, MessageConstraints, OneofConstraints } from "../../buf/validate/validate_pb";
-import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
-import type { FieldOptions, MessageOptions, OneofOptions } from "../../google/protobuf/descriptor_pb";
-import { file_google_protobuf_descriptor } from "../../google/protobuf/descriptor_pb";
 import type { Message } from "@bufbuild/protobuf";
+import type { FieldOptions, MessageOptions, OneofOptions } from "../../google/protobuf/descriptor_pb";
+import type { FieldConstraints, MessageConstraints, OneofConstraints } from "../../buf/validate/validate_pb";
 
 /**
  * Describes the file postgres_proto_schema/v1/common.proto.
  */
-export const file_postgres_proto_schema_v1_common: GenFile = /*@__PURE__*/
-  fileDesc("CiVwb3N0Z3Jlc19wcm90b19zY2hlbWEvdjEvY29tbW9uLnByb3RvEhhwb3N0Z3Jlc19wcm90b19zY2hlbWEudjEiVgoTRm9yZWlnbktleVJlZmVyZW5jZRIeCg1mb3JlaWduX3RhYmxlGAEgASgJQge6SARyAhABEh8KDmZvcmVpZ25fY29sdW1uGAIgASgJQge6SARyAhABIqwBCgpDb25zdHJhaW50EkAKBHR5cGUYASABKA4yKC5wb3N0Z3Jlc19wcm90b19zY2hlbWEudjEuQ29uc3RyYWludFR5cGVCCLpIBYIBAhABEhgKEGNoZWNrX2V4cHJlc3Npb24YAiABKAkSQgoLZm9yZWlnbl9rZXkYAyABKAsyLS5wb3N0Z3Jlc19wcm90b19zY2hlbWEudjEuRm9yZWlnbktleVJlZmVyZW5jZSr+BQoIUGxhdGZvcm0SEwoPUExBVEZPUk1fTEFURVNUEAASEAoMUExBVEZPUk1fUkRTEAESEwoPUExBVEZPUk1fQVVST1JBEAISFgoSUExBVEZPUk1fQ0xPVURfU1FMEAMSEgoOUExBVEZPUk1fQVpVUkUQBBIVChFQTEFURk9STV9BUFNBUkFEQhAFEhMKD1BMQVRGT1JNX0hFUk9LVRAGEhkKFVBMQVRGT1JNX0RJR0lUQUxPQ0VBThAHEhUKEVBMQVRGT1JNX0lCTUNMT1VEEAgSGQoVUExBVEZPUk1fQUxJQkFCQUNMT1VEEAkSGAoUUExBVEZPUk1fRUxFUEhBTlRTUUwQChIVChFQTEFURk9STV9TVVBBQkFTRRALEhcKE1BMQVRGT1JNX0NJVFVTQ0xPVUQQDBIWChJQTEFURk9STV9TQ0FMRUdSSUQQDRISCg5QTEFURk9STV9BSVZFThAOEhkKFVBMQVRGT1JNX0VOVEVSUFJJU0VEQhAPEhYKElBMQVRGT1JNX0dSRUVOUExVTRAQEhgKFFBMQVRGT1JNX1RJTUVTQ0FMRURCEBESFQoRUExBVEZPUk1fWVVHQUJZVEUQEhIUChBQTEFURk9STV9DUkFURURCEBMSFwoTUExBVEZPUk1fSFlQRVJTQ0FMRRAUEhAKDFBMQVRGT1JNX0VEQhAVEg8KC1BMQVRGT1JNX1hMEBYSEwoPUExBVEZPUk1fU1RPTE9OEBcSFAoQUExBVEZPUk1fUEFUUk9OSRAYEhYKElBMQVRGT1JNX0NMVVNURVJEQhAZEhgKFFBMQVRGT1JNX1BPU1RHUkVTUFJPEBoSFAoQUExBVEZPUk1fUEVSQ09OQRAbEhYKElBMQVRGT1JNX0JJR0FOSU1BTBAcEhEKDVBMQVRGT1JNX05FT04QHRIUChBQTEFURk9STV9DUlVOQ0hZEB4SDwoLUExBVEZPUk1fMTUQHxIPCgtQTEFURk9STV8xNhAgEg8KC1BMQVRGT1JNXzE3ECEqkQYKBFR5cGUSDQoJVFlQRV9URVhUEAASEAoMVFlQRV9JTlRFR0VSEAESDwoLVFlQRV9CSUdJTlQQAhIQCgxUWVBFX0JPT0xFQU4QAxISCg5UWVBFX1RJTUVTVEFNUBAEEhQKEFRZUEVfVElNRVNUQU1QVFoQBRINCglUWVBFX1VVSUQQBhIOCgpUWVBFX0pTT05CEAcSEAoMVFlQRV9WQVJDSEFSEAgSEAoMVFlQRV9OVU1FUklDEAkSDQoJVFlQRV9EQVRFEAoSDwoLVFlQRV9TRVJJQUwQCxISCg5UWVBFX0JJR1NFUklBTBAMEg0KCVRZUEVfSlNPThANEg8KC1RZUEVfRE9VQkxFEA4SDQoJVFlQRV9SRUFMEA8SDQoJVFlQRV9USU1FEBASEQoNVFlQRV9JTlRFUlZBTBAREg4KClRZUEVfQllURUEQEhINCglUWVBFX0lORVQQExIQCgxUWVBFX0RFQ0lNQUwQFBIRCg1UWVBFX1NNQUxMSU5UEBUSFAoQVFlQRV9TTUFMTFNFUklBTBAWEg0KCVRZUEVfQ0hBUhAXEg4KClRZUEVfTU9ORVkQGBINCglUWVBFX0VOVU0QGRIMCghUWVBFX0JJVBAaEhQKEFRZUEVfQklUX1ZBUllJTkcQGxINCglUWVBFX0NJRFIQHBIQCgxUWVBFX01BQ0FERFIQHRIRCg1UWVBFX1RTVkVDVE9SEB4SEAoMVFlQRV9UU1FVRVJZEB8SEgoOVFlQRV9JTlQ0UkFOR0UQIBISCg5UWVBFX0lOVDhSQU5HRRAhEhEKDVRZUEVfTlVNUkFOR0UQIhIQCgxUWVBFX1RTUkFOR0UQIxISCg5UWVBFX1RTVFpSQU5HRRAkEhIKDlRZUEVfREFURVJBTkdFECUSDgoKVFlQRV9QT0lOVBAmEg0KCVRZUEVfTElORRAnEg0KCVRZUEVfTFNFRxAoEgwKCFRZUEVfQk9YECkSDQoJVFlQRV9QQVRIECoSEAoMVFlQRV9QT0xZR09OECsSDwoLVFlQRV9DSVJDTEUQLCrnAQoOQ29uc3RyYWludFR5cGUSHwobQ09OU1RSQUlOVF9UWVBFX1VOU1BFQ0lGSUVEEAASHwobQ09OU1RSQUlOVF9UWVBFX1BSSU1BUllfS0VZEAESHAoYQ09OU1RSQUlOVF9UWVBFX05PVF9OVUxMEAISGgoWQ09OU1RSQUlOVF9UWVBFX1VOSVFVRRADEhkKFUNPTlNUUkFJTlRfVFlQRV9DSEVDSxAEEh8KG0NPTlNUUkFJTlRfVFlQRV9GT1JFSUdOX0tFWRAFEh0KGUNPTlNUUkFJTlRfVFlQRV9FWENMVVNJT04QBirfAQoRUmVmZXJlbnRpYWxBY3Rpb24SIgoeUkVGRVJFTlRJQUxfQUNUSU9OX1VOU1BFQ0lGSUVEEAASHwobUkVGRVJFTlRJQUxfQUNUSU9OX1JFU1RSSUNUEAESHgoaUkVGRVJFTlRJQUxfQUNUSU9OX0NBU0NBREUQAhIfChtSRUZFUkVOVElBTF9BQ1RJT05fU0VUX05VTEwQAxIiCh5SRUZFUkVOVElBTF9BQ1RJT05fU0VUX0RFRkFVTFQQBBIgChxSRUZFUkVOVElBTF9BQ1RJT05fTk9fQUNUSU9OEAU6VAoFcnVsZXMSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGJIIIAEoCzIeLmJ1Zi52YWxpZGF0ZS5GaWVsZENvbnN0cmFpbnRzUgVydWxlczpUCgVvbmVvZhIdLmdvb2dsZS5wcm90b2J1Zi5PbmVvZk9wdGlvbnMYkgggASgLMh4uYnVmLnZhbGlkYXRlLk9uZW9mQ29uc3RyYWludHNSBW9uZW9mOlwKB21lc3NhZ2USHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYkgggASgLMiAuYnVmLnZhbGlkYXRlLk1lc3NhZ2VDb25zdHJhaW50c1IHbWVzc2FnZUK+AQocY29tLnBvc3RncmVzX3Byb3RvX3NjaGVtYS52MUILQ29tbW9uUHJvdG9QAVoYcG9zdGdyZXNfcHJvdG9fc2NoZW1hL3YxogIDUFhYqgIWUG9zdGdyZXNQcm90b1NjaGVtYS5WMcoCFlBvc3RncmVzUHJvdG9TY2hlbWFcVjHiAiJQb3N0Z3Jlc1Byb3RvU2NoZW1hXFYxXEdQQk1ldGFkYXRh6gIXUG9zdGdyZXNQcm90b1NjaGVtYTo6VjFiBnByb3RvMw", [file_buf_validate_validate, file_google_protobuf_descriptor]);
+export declare const file_postgres_proto_schema_v1_common: GenFile;
 
 /**
  * Shared constraint messages
  *
  * @generated from message postgres_proto_schema.v1.ForeignKeyReference
  */
-export type ForeignKeyReference = Message<"postgres_proto_schema.v1.ForeignKeyReference"> & {
+export declare type ForeignKeyReference = Message<"postgres_proto_schema.v1.ForeignKeyReference"> & {
   /**
    * @generated from field: string foreign_table = 1;
    */
@@ -39,7 +35,7 @@ export type ForeignKeyReference = Message<"postgres_proto_schema.v1.ForeignKeyRe
  *
  * @generated from message postgres_proto_schema.v1.ForeignKeyReference
  */
-export type ForeignKeyReferenceJson = {
+export declare type ForeignKeyReferenceJson = {
   /**
    * @generated from field: string foreign_table = 1;
    */
@@ -55,13 +51,12 @@ export type ForeignKeyReferenceJson = {
  * Describes the message postgres_proto_schema.v1.ForeignKeyReference.
  * Use `create(ForeignKeyReferenceSchema)` to create a new message.
  */
-export const ForeignKeyReferenceSchema: GenMessage<ForeignKeyReference, ForeignKeyReferenceJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_common, 0);
+export declare const ForeignKeyReferenceSchema: GenMessage<ForeignKeyReference, ForeignKeyReferenceJson>;
 
 /**
  * @generated from message postgres_proto_schema.v1.Constraint
  */
-export type Constraint = Message<"postgres_proto_schema.v1.Constraint"> & {
+export declare type Constraint = Message<"postgres_proto_schema.v1.Constraint"> & {
   /**
    * @generated from field: postgres_proto_schema.v1.ConstraintType type = 1;
    */
@@ -81,7 +76,7 @@ export type Constraint = Message<"postgres_proto_schema.v1.Constraint"> & {
 /**
  * @generated from message postgres_proto_schema.v1.Constraint
  */
-export type ConstraintJson = {
+export declare type ConstraintJson = {
   /**
    * @generated from field: postgres_proto_schema.v1.ConstraintType type = 1;
    */
@@ -102,8 +97,7 @@ export type ConstraintJson = {
  * Describes the message postgres_proto_schema.v1.Constraint.
  * Use `create(ConstraintSchema)` to create a new message.
  */
-export const ConstraintSchema: GenMessage<Constraint, ConstraintJson> = /*@__PURE__*/
-  messageDesc(file_postgres_proto_schema_v1_common, 1);
+export declare const ConstraintSchema: GenMessage<Constraint, ConstraintJson>;
 
 /**
  * Platform options for PostgreSQL deployments
@@ -291,13 +285,12 @@ export enum Platform {
  *
  * @generated from enum postgres_proto_schema.v1.Platform
  */
-export type PlatformJson = "PLATFORM_LATEST" | "PLATFORM_RDS" | "PLATFORM_AURORA" | "PLATFORM_CLOUD_SQL" | "PLATFORM_AZURE" | "PLATFORM_APSARADB" | "PLATFORM_HEROKU" | "PLATFORM_DIGITALOCEAN" | "PLATFORM_IBMCLOUD" | "PLATFORM_ALIBABACLOUD" | "PLATFORM_ELEPHANTSQL" | "PLATFORM_SUPABASE" | "PLATFORM_CITUSCLOUD" | "PLATFORM_SCALEGRID" | "PLATFORM_AIVEN" | "PLATFORM_ENTERPRISEDB" | "PLATFORM_GREENPLUM" | "PLATFORM_TIMESCALEDB" | "PLATFORM_YUGABYTE" | "PLATFORM_CRATEDB" | "PLATFORM_HYPERSCALE" | "PLATFORM_EDB" | "PLATFORM_XL" | "PLATFORM_STOLON" | "PLATFORM_PATRONI" | "PLATFORM_CLUSTERDB" | "PLATFORM_POSTGRESPRO" | "PLATFORM_PERCONA" | "PLATFORM_BIGANIMAL" | "PLATFORM_NEON" | "PLATFORM_CRUNCHY" | "PLATFORM_15" | "PLATFORM_16" | "PLATFORM_17";
+export declare type PlatformJson = "PLATFORM_LATEST" | "PLATFORM_RDS" | "PLATFORM_AURORA" | "PLATFORM_CLOUD_SQL" | "PLATFORM_AZURE" | "PLATFORM_APSARADB" | "PLATFORM_HEROKU" | "PLATFORM_DIGITALOCEAN" | "PLATFORM_IBMCLOUD" | "PLATFORM_ALIBABACLOUD" | "PLATFORM_ELEPHANTSQL" | "PLATFORM_SUPABASE" | "PLATFORM_CITUSCLOUD" | "PLATFORM_SCALEGRID" | "PLATFORM_AIVEN" | "PLATFORM_ENTERPRISEDB" | "PLATFORM_GREENPLUM" | "PLATFORM_TIMESCALEDB" | "PLATFORM_YUGABYTE" | "PLATFORM_CRATEDB" | "PLATFORM_HYPERSCALE" | "PLATFORM_EDB" | "PLATFORM_XL" | "PLATFORM_STOLON" | "PLATFORM_PATRONI" | "PLATFORM_CLUSTERDB" | "PLATFORM_POSTGRESPRO" | "PLATFORM_PERCONA" | "PLATFORM_BIGANIMAL" | "PLATFORM_NEON" | "PLATFORM_CRUNCHY" | "PLATFORM_15" | "PLATFORM_16" | "PLATFORM_17";
 
 /**
  * Describes the enum postgres_proto_schema.v1.Platform.
  */
-export const PlatformSchema: GenEnum<Platform, PlatformJson> = /*@__PURE__*/
-  enumDesc(file_postgres_proto_schema_v1_common, 0);
+export declare const PlatformSchema: GenEnum<Platform, PlatformJson>;
 
 /**
  * PostgreSQL column types
@@ -572,13 +565,12 @@ export enum Type {
  *
  * @generated from enum postgres_proto_schema.v1.Type
  */
-export type TypeJson = "TYPE_TEXT" | "TYPE_INTEGER" | "TYPE_BIGINT" | "TYPE_BOOLEAN" | "TYPE_TIMESTAMP" | "TYPE_TIMESTAMPTZ" | "TYPE_UUID" | "TYPE_JSONB" | "TYPE_VARCHAR" | "TYPE_NUMERIC" | "TYPE_DATE" | "TYPE_SERIAL" | "TYPE_BIGSERIAL" | "TYPE_JSON" | "TYPE_DOUBLE" | "TYPE_REAL" | "TYPE_TIME" | "TYPE_INTERVAL" | "TYPE_BYTEA" | "TYPE_INET" | "TYPE_DECIMAL" | "TYPE_SMALLINT" | "TYPE_SMALLSERIAL" | "TYPE_CHAR" | "TYPE_MONEY" | "TYPE_ENUM" | "TYPE_BIT" | "TYPE_BIT_VARYING" | "TYPE_CIDR" | "TYPE_MACADDR" | "TYPE_TSVECTOR" | "TYPE_TSQUERY" | "TYPE_INT4RANGE" | "TYPE_INT8RANGE" | "TYPE_NUMRANGE" | "TYPE_TSRANGE" | "TYPE_TSTZRANGE" | "TYPE_DATERANGE" | "TYPE_POINT" | "TYPE_LINE" | "TYPE_LSEG" | "TYPE_BOX" | "TYPE_PATH" | "TYPE_POLYGON" | "TYPE_CIRCLE";
+export declare type TypeJson = "TYPE_TEXT" | "TYPE_INTEGER" | "TYPE_BIGINT" | "TYPE_BOOLEAN" | "TYPE_TIMESTAMP" | "TYPE_TIMESTAMPTZ" | "TYPE_UUID" | "TYPE_JSONB" | "TYPE_VARCHAR" | "TYPE_NUMERIC" | "TYPE_DATE" | "TYPE_SERIAL" | "TYPE_BIGSERIAL" | "TYPE_JSON" | "TYPE_DOUBLE" | "TYPE_REAL" | "TYPE_TIME" | "TYPE_INTERVAL" | "TYPE_BYTEA" | "TYPE_INET" | "TYPE_DECIMAL" | "TYPE_SMALLINT" | "TYPE_SMALLSERIAL" | "TYPE_CHAR" | "TYPE_MONEY" | "TYPE_ENUM" | "TYPE_BIT" | "TYPE_BIT_VARYING" | "TYPE_CIDR" | "TYPE_MACADDR" | "TYPE_TSVECTOR" | "TYPE_TSQUERY" | "TYPE_INT4RANGE" | "TYPE_INT8RANGE" | "TYPE_NUMRANGE" | "TYPE_TSRANGE" | "TYPE_TSTZRANGE" | "TYPE_DATERANGE" | "TYPE_POINT" | "TYPE_LINE" | "TYPE_LSEG" | "TYPE_BOX" | "TYPE_PATH" | "TYPE_POLYGON" | "TYPE_CIRCLE";
 
 /**
  * Describes the enum postgres_proto_schema.v1.Type.
  */
-export const TypeSchema: GenEnum<Type, TypeJson> = /*@__PURE__*/
-  enumDesc(file_postgres_proto_schema_v1_common, 1);
+export declare const TypeSchema: GenEnum<Type, TypeJson>;
 
 /**
  * @generated from enum postgres_proto_schema.v1.ConstraintType
@@ -623,13 +615,12 @@ export enum ConstraintType {
 /**
  * @generated from enum postgres_proto_schema.v1.ConstraintType
  */
-export type ConstraintTypeJson = "CONSTRAINT_TYPE_UNSPECIFIED" | "CONSTRAINT_TYPE_PRIMARY_KEY" | "CONSTRAINT_TYPE_NOT_NULL" | "CONSTRAINT_TYPE_UNIQUE" | "CONSTRAINT_TYPE_CHECK" | "CONSTRAINT_TYPE_FOREIGN_KEY" | "CONSTRAINT_TYPE_EXCLUSION";
+export declare type ConstraintTypeJson = "CONSTRAINT_TYPE_UNSPECIFIED" | "CONSTRAINT_TYPE_PRIMARY_KEY" | "CONSTRAINT_TYPE_NOT_NULL" | "CONSTRAINT_TYPE_UNIQUE" | "CONSTRAINT_TYPE_CHECK" | "CONSTRAINT_TYPE_FOREIGN_KEY" | "CONSTRAINT_TYPE_EXCLUSION";
 
 /**
  * Describes the enum postgres_proto_schema.v1.ConstraintType.
  */
-export const ConstraintTypeSchema: GenEnum<ConstraintType, ConstraintTypeJson> = /*@__PURE__*/
-  enumDesc(file_postgres_proto_schema_v1_common, 2);
+export declare const ConstraintTypeSchema: GenEnum<ConstraintType, ConstraintTypeJson>;
 
 /**
  * @generated from enum postgres_proto_schema.v1.ReferentialAction
@@ -669,31 +660,27 @@ export enum ReferentialAction {
 /**
  * @generated from enum postgres_proto_schema.v1.ReferentialAction
  */
-export type ReferentialActionJson = "REFERENTIAL_ACTION_UNSPECIFIED" | "REFERENTIAL_ACTION_RESTRICT" | "REFERENTIAL_ACTION_CASCADE" | "REFERENTIAL_ACTION_SET_NULL" | "REFERENTIAL_ACTION_SET_DEFAULT" | "REFERENTIAL_ACTION_NO_ACTION";
+export declare type ReferentialActionJson = "REFERENTIAL_ACTION_UNSPECIFIED" | "REFERENTIAL_ACTION_RESTRICT" | "REFERENTIAL_ACTION_CASCADE" | "REFERENTIAL_ACTION_SET_NULL" | "REFERENTIAL_ACTION_SET_DEFAULT" | "REFERENTIAL_ACTION_NO_ACTION";
 
 /**
  * Describes the enum postgres_proto_schema.v1.ReferentialAction.
  */
-export const ReferentialActionSchema: GenEnum<ReferentialAction, ReferentialActionJson> = /*@__PURE__*/
-  enumDesc(file_postgres_proto_schema_v1_common, 3);
+export declare const ReferentialActionSchema: GenEnum<ReferentialAction, ReferentialActionJson>;
 
 /**
  * This is the standard field number for validate rules
  *
  * @generated from extension: buf.validate.FieldConstraints rules = 1042;
  */
-export const rules: GenExtension<FieldOptions, FieldConstraints> = /*@__PURE__*/
-  extDesc(file_postgres_proto_schema_v1_common, 0);
+export declare const rules: GenExtension<FieldOptions, FieldConstraints>;
 
 /**
  * @generated from extension: buf.validate.OneofConstraints oneof = 1042;
  */
-export const oneof: GenExtension<OneofOptions, OneofConstraints> = /*@__PURE__*/
-  extDesc(file_postgres_proto_schema_v1_common, 1);
+export declare const oneof: GenExtension<OneofOptions, OneofConstraints>;
 
 /**
  * @generated from extension: buf.validate.MessageConstraints message = 1042;
  */
-export const message: GenExtension<MessageOptions, MessageConstraints> = /*@__PURE__*/
-  extDesc(file_postgres_proto_schema_v1_common, 2);
+export declare const message: GenExtension<MessageOptions, MessageConstraints>;
 
