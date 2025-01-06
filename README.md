@@ -3,7 +3,7 @@
 [![Buf Schema Registry](https://img.shields.io/badge/buf.build-postgres--proto--schema-blue)](https://buf.build/zackiles/postgres-proto-schema)
 [![License](https://img.shields.io/github/license/zackiles/postgres-proto-schema)](LICENSE)
 
-A Protobuf schema definition for PostgreSQL, enabling type-safe database schema generation through protocol buffers. This package provides comprehensive PostgreSQL type support, validation, and platform-specific deployment options.
+A Protobuf (proto3 and buf v2) schema definition for PostgreSQL, enabling type-safe database schema generation through protocol buffers. This package provides comprehensive PostgreSQL type support, validation, and platform-specific deployment options.
 
 ---
 
