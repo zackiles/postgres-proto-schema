@@ -87,7 +87,7 @@ We provide pre-compiled code for Go and TypeScript and Javascript. At the moment
 git clone --depth 1 --filter=blob:none --sparse https://github.com/zackiles/postgres-proto-schema ./src/postgres-proto-schema && cd ./src/postgres-proto-schema && git sparse-checkout set gen/ts
 
 # Then import. Example:
-# import * as Schema from './src/postgres-proto-schema/gen/ts/schema_pb.js/ts/d.ts'
+# import * as Schema from './src/postgres-proto-schema/gen/ts/schema_pb.js (or .ts/.d.ts)'
 # Node, you'll need to npm install @bufbuild/protobuf to use this SDK.
 ```
 
