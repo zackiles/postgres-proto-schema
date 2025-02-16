@@ -1,2 +1,2 @@
 * linguist-vendored
-*.proto linguist-vendored=false
+*.go linguist-vendored=false
